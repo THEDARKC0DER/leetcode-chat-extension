@@ -26,14 +26,27 @@ const ChatPage = () => {
     }
   };
 
+  const getProblemSlug = () => {
+    const parts = window.location.pathname.split("/");
+    const index = parts.indexOf("problems");
+    return index !== -1 ? parts[index + 1] : "unknown-problem";
+  };
+
+  console.log(getProblemSlug());
+
+  const problemId = getProblemSlug() || "local-test-room";
+
   const handleSendMessage = (text) => {
     socket.emit("send-message", {
       user: username,
       text,
+      problemId,
     });
   };
 
   useEffect(() => {
+    socket.emit("join-room", problemId);
+
     socket.on("receive-message", (msg) => {
       setMessages((prev) => [...prev, msg]);
     });

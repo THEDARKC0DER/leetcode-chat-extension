@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 
 const ChatWindow = ({ onSendMessage, messages }) => {
@@ -13,6 +13,10 @@ const ChatWindow = ({ onSendMessage, messages }) => {
     onSendMessage(message.trim());
     setMessage("");
   };
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
   return (
     <div
