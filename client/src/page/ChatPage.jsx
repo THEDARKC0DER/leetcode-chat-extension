@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import UsernameForm from "../components/UsernameForm";
 import ChatWindow from "../components/ChatWindow";
 import { useDispatch, useSelector } from "react-redux";
@@ -26,15 +26,23 @@ const ChatPage = () => {
     }
   };
 
-  const getProblemSlug = () => {
+  const problemId = useMemo(() => {
     const parts = window.location.pathname.split("/");
     const index = parts.indexOf("problems");
-    return index !== -1 ? parts[index + 1] : "unknown-problem";
-  };
+    const slug = index !== -1 ? parts[index + 1] : "unknown-problem";
+    console.log(slug);
+    return slug;
+  }, []);
 
-  console.log(getProblemSlug());
+  // const getProblemSlug = () => {
+  //   const parts = window.location.pathname.split("/");
+  //   const index = parts.indexOf("problems");
+  //   console.log("unknown-problem");
+  //   return index !== -1 ? parts[index + 1] : "unknown-problem";
+  // };
+  // const problemId = getProblemSlug() || "local-test-room";
 
-  const problemId = getProblemSlug() || "local-test-room";
+  console.log("random");
 
   const handleSendMessage = (text) => {
     socket.emit("send-message", {

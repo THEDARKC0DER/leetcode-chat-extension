@@ -20,7 +20,9 @@ const ChatWindow = ({ onSendMessage, messages }) => {
 
   return (
     <div
-      style={{ backgroundColor: "#101828" }}
+      style={{
+        backgroundColor: "#101828",
+      }}
       className="flex flex-col h-[400px]  text-white p-4 rounded"
     >
       <h2 className="text-xl font-semibold mb-4">
@@ -28,7 +30,7 @@ const ChatWindow = ({ onSendMessage, messages }) => {
       </h2>
       <div
         style={{ backgroundColor: "#1e2939 " }}
-        className="flex-1 overflow-y-auto  space-y-2  p-4 rounded-lg mb-4"
+        className="flex-1 overflow-y-auto  space-y-2  p-4 rounded-lg mb-4 hide-scrollbar"
       >
         {messages.map((msg) => (
           <div key={msg.id || msg.timestamp} className="text-sm">
